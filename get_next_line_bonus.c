@@ -1,22 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   get_next_line_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mikhmart <mikhmart@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/01 19:43:41 by mikhmart          #+#    #+#             */
-/*   Updated: 2024/04/15 20:46:53 by mikhmart         ###   ########.fr       */
+/*   Updated: 2024/04/15 20:48:46 by mikhmart         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
-
-char	*ft_free(char *str)
-{
-	free(str);
-	return (str);
-}
+#include "get_next_line_bonus.h"
 
 char	*get_result(char *file)
 {
@@ -72,7 +66,7 @@ char	*shrink_dest(char *file)
 
 char	*get_next_line(int fd)
 {
-	static char	*file;
+	static char	*file[OPEN_MAX];
 	char		lt[BUFFER_SIZE + 1];
 	int			buf_was_read;
 	char		*result;
@@ -85,14 +79,14 @@ char	*get_next_line(int fd)
 		if (buf_was_read <= 0)
 			break ;
 		lt[buf_was_read] = '\0';
-		file = ft_strjoin(file, lt);
+		file[fd] = ft_strjoin(file[fd], lt);
 		if (ft_strchr(lt, '\n'))
 			break ;
 	}
 	if (buf_was_read < 0)
 		return (0);
-	result = get_result(file);
-	file = shrink_dest(file);
+	result = get_result(file[fd]);
+	file[fd] = shrink_dest(file[fd]);
 	if (!buf_was_read && !result)
 		return (ft_free(file[fd]));
 	return (result);
