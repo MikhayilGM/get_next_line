@@ -6,7 +6,7 @@
 /*   By: mikhmart <mikhmart@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/01 19:43:41 by mikhmart          #+#    #+#             */
-/*   Updated: 2024/04/15 20:46:53 by mikhmart         ###   ########.fr       */
+/*   Updated: 2024/04/27 17:55:32 by mikhmart         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 char	*ft_free(char *str)
 {
 	free(str);
-	return (str);
+	return (0);
 }
 
 char	*get_result(char *file)
@@ -94,7 +94,7 @@ char	*get_next_line(int fd)
 	result = get_result(file);
 	file = shrink_dest(file);
 	if (!buf_was_read && !result)
-		return (ft_free(file[fd]));
+		return (ft_free(file));
 	return (result);
 }
 
@@ -102,6 +102,8 @@ char	*get_next_line(int fd)
 // { 
 // 	int	fd;
 // 	fd = open("text.txt", O_RDONLY);
+// 	printf("%s", get_next_line(fd));
+// 	printf("%s", get_next_line(fd));
 // 	printf("%s", get_next_line(fd));
 // 	printf("%s", get_next_line(fd));
 // 	return 0;

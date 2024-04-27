@@ -6,11 +6,17 @@
 /*   By: mikhmart <mikhmart@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/01 19:43:41 by mikhmart          #+#    #+#             */
-/*   Updated: 2024/04/15 20:48:46 by mikhmart         ###   ########.fr       */
+/*   Updated: 2024/04/27 17:57:42 by mikhmart         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line_bonus.h"
+
+char	*ft_free(char *str)
+{
+	free(str);
+	return (0);
+}
 
 char	*get_result(char *file)
 {
