@@ -6,11 +6,17 @@
 /*   By: mikhmart <mikhmart@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/01 19:43:41 by mikhmart          #+#    #+#             */
-/*   Updated: 2024/04/27 17:55:32 by mikhmart         ###   ########.fr       */
+/*   Updated: 2024/04/29 19:18:26 by mikhmart         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
+
+int	condition(int bwr, char *lt)
+{
+	free(lt);
+	return (bwr < 0);
+}
 
 char	*ft_free(char *str)
 {
@@ -73,12 +79,13 @@ char	*shrink_dest(char *file)
 char	*get_next_line(int fd)
 {
 	static char	*file;
-	char		lt[BUFFER_SIZE + 1];
+	char		*lt;
 	int			buf_was_read;
 	char		*result;
 
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
+	lt = (char *)malloc(BUFFER_SIZE + 1);
 	while (1)
 	{
 		buf_was_read = read(fd, lt, BUFFER_SIZE);
@@ -89,7 +96,7 @@ char	*get_next_line(int fd)
 		if (ft_strchr(lt, '\n'))
 			break ;
 	}
-	if (buf_was_read < 0)
+	if (condition(buf_was_read, lt))
 		return (0);
 	result = get_result(file);
 	file = shrink_dest(file);
